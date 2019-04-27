@@ -67,10 +67,6 @@
                     //Stop checking
                     clearInterval(checking);
                     let json = await response.json();
-                    console.log(json);
-                    
-                    alert('Yujuuuu we have a token!');
-                    
                     let access_token = json.access_token;
 
                     //redirecting with the access token
