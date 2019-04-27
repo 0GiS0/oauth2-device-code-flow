@@ -1,0 +1,91 @@
+<% include partials/header %>
+<!--Stepper from Codepen: https://codepen.io/thdeux/pen/zBGNrM-->
+<div class="md-stepper-horizontal orange">
+    <div class="md-step">
+        <a href="/">
+            <div class="md-step-circle"><span>1</span></div>
+        </a>
+        <div class="md-step-title">Get the device code</div>
+        <div class="md-step-bar-left"></div>
+        <div class="md-step-bar-right"></div>
+    </div>
+    <div class="md-step active">
+        <div class="md-step-circle"><span>2</span></div>
+        <div class="md-step-title">Wait for the user to validate the code</div>
+        <div class="md-step-bar-left"></div>
+        <div class="md-step-bar-right"></div>
+    </div>
+    <div class="md-step">
+        <div class="md-step-circle"><span>3</span></div>
+        <div class="md-step-title">Get the access token</div>
+        <div class="md-step-bar-left"></div>
+        <div class="md-step-bar-right"></div>
+    </div>
+    <div class="md-step">
+        <div class="md-step-circle"><span>4</span></div>
+        <div class="md-step-title">Calling the API</div>
+        <div class="md-step-bar-left"></div>
+        <div class="md-step-bar-right"></div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                The Device Code
+            </div>
+            <form action="/call/ms/graph" method="POST">
+                <div class="card-body">
+                    <p class="card-text"><%= message %></p>
+                    <pre class="language-json"><%= code %></pre>
+                    <input type="hidden" name="code" value="<%=code %>" />
+                    <p class="card-text">Waiting for you, to to sign in and introduce the code. (Pooling /token endpoint
+                        for the requested token)</p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<% include partials/footer %>
+
+<script>
+
+    (function () {
+
+        let checking = setInterval(function () {
+            fetch('/checking', {
+                method: 'POST',
+                body: `device_code=<%= device_code %>`,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then(async response => {
+                if (response.ok) {
+                    //Stop checking
+                    clearInterval(checking);
+                    let json = await response.json();
+                    console.log(json);
+                    
+                    alert('Yujuuuu we have a token!');
+                    
+                    let access_token = json.access_token;
+
+                    //redirecting with the access token
+                    window.location.replace(`http://localhost:8000/access/token/?access_token=${access_token}`);
+                }
+                else {
+                    console.log('We have to wait');
+                }
+            })
+        }, <%= interval %> * 1000);
+
+    })();
+
+</script>
+
+</body>
+
+</html>
