@@ -1,14 +1,15 @@
 //Modules
-const express = require('express'),
-    bunyan = require('bunyan'),
-    bodyParser = require('body-parser'),
-    fetch = require("node-fetch");
+import express from 'express';
+import bunyan from 'bunyan';
+import bodyParser from 'body-parser';
+import fetch from 'node-fetch';
 
 //Load values from .env file
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app = express();
-const log = bunyan.createLogger({ name: 'Authorization Code Flow' });
+const log = bunyan.createLogger({ name: 'Device Code Flow' });
 
 app.use(express.static('public'));
 
