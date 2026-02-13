@@ -112,7 +112,7 @@ oauth2-device-code-flow/
 │   ├── access-token.ejs      # Access token display
 │   ├── calling-ms-graph.ejs  # Microsoft Graph API response
 │   └── partials/             # Reusable EJS components
-└── public/                   # Static assets (CSS, JS, images)
+└── public/                   # Static assets (CSS, JS)
 ```
 
 ### Key Files
