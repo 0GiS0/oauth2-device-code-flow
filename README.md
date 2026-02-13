@@ -10,7 +10,7 @@ This demo walks through the complete 4-step flow:
 1. **Get Device Code** — Request a device code and user code from Azure AD
 2. **User Authentication** — User visits the verification URL and enters the code
 3. **Retrieve Access Token** — Poll for the access token once the user has authenticated
-4. **Call Microsoft Graph API** — Use the access token to call the `/me` endpoint
+4. **Call Microsoft Graph API** — Use the access token to call the beta `/me` endpoint
 
 ## 🎯 Prerequisites
 
@@ -95,7 +95,7 @@ The application will start on `http://localhost:8000`.
    - Once authentication is complete, the access token is retrieved
 
 5. **Step 4: Call Microsoft Graph API**
-   - The app uses the access token to call Microsoft Graph `/me` endpoint
+   - The app uses the access token to call the Microsoft Graph beta `/me` endpoint
    - Your user profile information is displayed
 
 ## 📁 Project Structure
@@ -118,10 +118,10 @@ oauth2-device-code-flow/
 ### Key Files
 
 - **`server.js`** — Contains all Express routes and OAuth 2.0 Device Code Flow logic:
-  - `/get/the/code` — Initiates the device code request
-  - `/checking` — Polls Azure AD for token
-  - `/access/token` — Displays the retrieved access token
-  - `/call/ms/graph` — Calls Microsoft Graph API
+  - `GET /get/the/code` — Initiates the device code request
+  - `POST /checking` — Polls Azure AD for token
+  - `GET /access/token` — Displays the retrieved access token
+  - `POST /call/ms/graph` — Calls Microsoft Graph API
 
 - **`.env.sample`** — Template for required environment variables
 
