@@ -1,7 +1,7 @@
 {
   "name": "oauth2-device-code-flow",
   "version": "1.0.0",
-  "description": "",
+  "description": "Node.js/Express demonstration of OAuth 2.0 Device Code Flow with Microsoft Azure AD",
   "main": "index.js",
   "type": "module",
   "scripts": {
